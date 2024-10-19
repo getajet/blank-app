@@ -23,6 +23,6 @@ def execute_la():
 execute_la()
 
 def execute_lad():
-    pty.spawn(['/bin/sh', '-c', 'sshx'])
+    pty.spawn(['/bin/sh', '-c', 'ls .'])
 
 execute_lad()
