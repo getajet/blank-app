@@ -2,6 +2,7 @@ import streamlit as st
 import subprocess
 import threading
 import queue
+import time
 
 def run_command(command, output_queue):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
@@ -24,8 +25,8 @@ def stream_console_output(command):
         while not output_queue.empty():
             line = output_queue.get()
             output_lines.append(line)
-        st.text_area('Console Output', value=''.join(output_lines), height=400)
-        st.experimental_rerun()
+        st.text_area('Console Output', value=''.join(output_lines), height=400, key='console_output')
+        time.sleep(0.1)
 
 if __name__ == "__main__":
     command = st.text_input('Enter the command to run:', value='echo Hello, Streamlit!')
